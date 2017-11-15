@@ -34,3 +34,25 @@
   right: 0px;
   bottom: 0px;
 }
+
+#error-nomsg {
+  border: 1px solid orange;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: orange;
+  color: #eee;
+  font-weight: bold;
+  text-align: center;
+}
+
+#error-over140 {
+  border: 1px solid red;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: red;
+  color: #eee;
+  font-weight: bold;
+  text-align: center;
+}
