@@ -6,6 +6,7 @@
   border: 1px solid #C0C0C0;
   border-radius: 5px;
   background-color: #eee;
+  display: none;
 }
 
 .new-tweet > h2 {

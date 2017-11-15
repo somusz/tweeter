@@ -74,6 +74,11 @@ $(document).ready (function () {
     }
   })
 
+  $('#compose-button').click(function () {
+    $('.new-tweet').slideToggle('fast');
+    $('.new-tweet textarea').focus();
+  })
+
 
   // let createTweetElement = function (tweet) {
   //   let $tweet = $('<article>').addClass('tweet');
