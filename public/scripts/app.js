@@ -69,26 +69,29 @@ $(document).ready (function () {
       div.appendChild(document.createTextNode(str));
       return div.innerHTML;
     }
+    function msToDays (ms) {
+      let date = new Date(ms);
+      let now = new Date(Date.now());
+      return now.getDay() - date.getDay();
+    }
 
     return $(
-      `<article>`+
-        `<header>`+
-          `<img class=\'hovering\' src=${tweet.user.avatars.small}>`+
-          `<span class=\'user-name hovering\'>${tweet.user.name}</span>`+
-          `<span class=\'handle hovering\'>${tweet.user.handle}</span>`+
-        `</header>`+
-      `<p>${escape(tweet.content.text)}</p>`+
-        `<footer>`+
-          `<span>${tweet.created_at} days ago</span>`+
-          `<span class=\'links\'>`+
-            `<a href=\'\'><i class=\'fa fa-flag\' aria-hidden=\'true\'></i></a>`+
-            `<a href=\'\'><i class=\'fa fa-retweet\' aria-hidden=\'true\'></i></a>`+
-            `<a href=\'\'><i class=\'fa fa-heart\' aria-hidden=\'true\'></i></a>`+
-          `</span>`+
-        `</footer>`+
-      `</article>`);
-
-
+      `<article>
+        <header>
+          <img class=\'hovering\' src=${tweet.user.avatars.small}>
+          <span class=\'user-name hovering\'>${tweet.user.name}</span>
+          <span class=\'handle hovering\'>${tweet.user.handle}</span>
+        </header>
+      <p>${escape(tweet.content.text)}</p>
+        <footer>
+          <span>Posted ${msToDays(tweet.created_at)} days ago</span>
+          <span class=\'links\'>
+            <a href=\'\'><i class=\'fa fa-flag\' aria-hidden=\'true\'></i></a>
+            <a href=\'\'><i class=\'fa fa-retweet\' aria-hidden=\'true\'></i></a>
+            <a href=\'\'><i class=\'fa fa-heart\' aria-hidden=\'true\'></i></a>
+          </span>
+        </footer>
+      </article>`);
   }
 
   let renderTweets = function (tweets) {
@@ -97,7 +100,20 @@ $(document).ready (function () {
       $('#tweet-container').append(toAppend);
     })
   }
-  renderTweets(DATABASE);
+
+  let loadTweets = function () {
+    $.ajax({
+      url: '/tweets',
+      method: 'GET',
+      success: function (data) {
+        renderTweets(data);
+      }
+    })
+
+  }()
+
+  // renderTweets(DATABASE);
+
 
   // let createTweetElement = function (tweet) {
   //   let $tweet = $('<article>').addClass('tweet');
@@ -120,6 +136,7 @@ $(document).ready (function () {
 
   // let $container = $('#tweet-container');
   // $container.append(createNewTweet(DATABASE));
+
 
 
 })
