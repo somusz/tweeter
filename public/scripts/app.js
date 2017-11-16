@@ -140,8 +140,9 @@ $(document).ready (() => {
         data: tweetData,
         success: () => {
 
-//clearing textarea upon successful post
+//clearing textarea and resetting counter upon successful post
           $('#new-tweet-input').val('');
+          $(this).find('.counter').text('140');
 
 //reloading element upon successful post
           loadTweets();

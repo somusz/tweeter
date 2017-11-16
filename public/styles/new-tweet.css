@@ -24,6 +24,7 @@
 .new-tweet form textarea {
   width: 100%;
   padding: 5px;
+  margin-bottom: 10px;
 }
 
 .new-tweet form input {
