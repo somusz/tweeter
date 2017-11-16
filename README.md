@@ -20,3 +20,7 @@ Stack: HTML, CSS, JS, jQuery, AJAX, Node, Express and MongoDB
 - jQuery
 - Md5
 - Mongodb
+
+## Screenshot
+
+!["Tweeter home page"](https://github.com/somusz/tweeter/blob/master/docs/Screenshot-2017-11-16%20Tweeter%20-%20Home%20Page.png?raw=true)
