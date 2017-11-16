@@ -17,8 +17,6 @@ MongoClient.connect(MONGODB_URI, function (err, db) {
     throw err;
   }
 
-  // let data = db.collection('tweets');
-
   const DataHelpers = require("./lib/data-helpers.js")(db);
 
   const tweetsRoutes = require("./routes/tweets")(DataHelpers);
@@ -32,34 +30,3 @@ MongoClient.connect(MONGODB_URI, function (err, db) {
   //db.close();
 
 });
-
-
-// MongoClient.connect(MONGODB_URI, (err, db) => {
-//   if (err) {
-//     console.error(`Failed to connect: ${MONGODB_URI}`);
-//     throw err;
-//   }
-
-//   console.log(`Connected to mongodb: ${MONGODB_URI}`);
-
-//   function getTweets(callback) {
-//     db.collection("tweets").find().toArray((err, tweets) => {
-//       if (err) {
-//         return callback(err);
-//       }
-//       callback(null, tweets);
-//     });
-//   }
-
-//   getTweets((err, tweets) => {
-//     if (err) throw err;
-
-//     console.log("Logging each tweet:");
-//     for (let tweet of tweets) {
-//       console.log(tweet);
-//     }
-
-//     db.close();
-//   });
-
-// });
