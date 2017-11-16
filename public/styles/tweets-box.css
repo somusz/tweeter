@@ -52,6 +52,7 @@ article p {
   padding: 20px;
   font-size: 30px;
   color: #133926;
+  word-wrap: break-word;
 }
 
 article footer {
