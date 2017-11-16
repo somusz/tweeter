@@ -7,9 +7,52 @@ $(document).ready (function () {
     }
 
   let msToDays = function (ms) {
-    let date = new Date(ms);
-    let now = new Date(Date.now());
-    return now.getDay() - date.getDay();
+    let timeToPrint;
+    let timeMeasure = '';
+    let plural = '';
+    let since = Date.now() - ms;
+    let sinceInSec = Math.floor(since/1000);
+    let sinceInMin = Math.floor(since/1000/60);
+    let sinceInHrs = Math.floor(since/1000/60/60);
+    let sinceInDay = Math.floor(since/1000/60/60/24);
+    let sinceInMth = Math.floor(since/1000/60/60/24/12);
+    let sinceInYrs = Math.floor(since/1000/60/60/24/365);
+
+    if (sinceInYrs > 0) {
+      timeToPrint = sinceInYrs;
+      timeMeasure = 'year';
+    }
+
+    else if (sinceInMth > 0) {
+      timeToPrint = sinceInMth;
+      timeMeasure = 'month';
+    }
+
+    else if (sinceInDay > 0) {
+      timeToPrint = sinceInDay;
+      timeMeasure = 'day';
+    }
+
+    else if (sinceInHrs > 0) {
+      timeToPrint = sinceInHrs;
+      timeMeasure = 'hour';
+    }
+
+    else if (sinceInMin > 0) {
+      timeToPrint = sinceInMin;
+      timeMeasure = 'minute';
+    }
+
+    else {
+      timeToPrint = sinceInSec;
+      timeMeasure = 'second';
+    }
+
+    if (timeToPrint > 1) {
+      plural = 's';
+    }
+
+    return `Posted ${timeToPrint} ${timeMeasure+plural} ago`;
   }
 
   let createTweetElement = function (tweet) {
@@ -22,11 +65,11 @@ $(document).ready (function () {
         </header>
         <p>${escape(tweet.content.text)}</p>
         <footer>
-          <span>Posted ${msToDays(tweet.created_at)} days ago</span>
+          <span>${msToDays(tweet.created_at)}</span>
           <span class="links">
-            <a href="><i class="fa fa-flag" aria-hidden="true"></i></a>
-            <a href="><i class="fa fa-retweet" aria-hidden="true"></i></a>
-            <a href="><i class="fa fa-heart" aria-hidden="true"></i></a>
+            <a href=''><i class="fa fa-flag" aria-hidden="true"></i></a>
+            <a href=''><i class="fa fa-retweet" aria-hidden="true"></i></a>
+            <a href=''><i class="fa fa-heart" aria-hidden="true"></i></a>
           </span>
         </footer>
       </article>`);
@@ -77,12 +120,15 @@ $(document).ready (function () {
       $.ajax({
         url: '/tweets/',
         method: 'POST',
-        data: tweetData
+        data: tweetData,
+        success: function () {
+
+          $('#new-tweet-input').val('');
+
+          loadTweets();
+
+        }
       });
-
-      loadTweets();
-
-      $('#new-tweet-input').val('');
     }
   })
 
