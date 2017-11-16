@@ -1,4 +1,4 @@
-
+/*tweets flow design*/
 article {
   margin: 2em 2em;
   position: relative;
@@ -6,6 +6,7 @@ article {
   border-radius: 5px;
 }
 
+/*hover state changes*/
 article:hover {
   border: 1px solid #4d4d4d;
 }
@@ -22,6 +23,7 @@ article:hover header .hovering {
   opacity: 1;
 }
 
+/*image, username and user handle greyed out unless hovered over*/
 article header img {
   opacity: 0.7;
   position: absolute;
@@ -61,6 +63,7 @@ article footer {
   color: #133926;
 }
 
+/*icons hidden unless hovered over*/
 article footer .links {
   opacity: 0;
   position: absolute;
@@ -71,6 +74,7 @@ article footer .links i {
   padding: 3px;
 }
 
+/*icons appear upon hovering over*/
 article:hover footer .links {
   opacity: 1;
 }

@@ -1,4 +1,4 @@
-
+/*controling new tweet box*/
 .new-tweet {
   margin: 0 2em;
   padding: 10px;
@@ -9,6 +9,7 @@
   display: none;
 }
 
+/*box title*/
 .new-tweet > h2 {
   border-bottom: 1px solid #000;
   line-height: 1.2em;
@@ -36,6 +37,7 @@
   bottom: 0px;
 }
 
+/*empty submission error message*/
 #error-nomsg {
   border: 1px solid orange;
   border-radius: 5px;
@@ -47,6 +49,7 @@
   text-align: center;
 }
 
+/*oversized submission error message*/
 #error-over140 {
   border: 1px solid red;
   border-radius: 5px;

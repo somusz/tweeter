@@ -1,8 +1,11 @@
+<!-- One-page html: index -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Tweeter - Home Page</title>
 
+<!-- referencing necessary external sources -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,700,700i" rel="stylesheet">
 
@@ -14,13 +17,13 @@
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
     <script src="https://use.fontawesome.com/6f59f1af88.js"></script>
 
-
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
   </head>
 
   <body>
 
+<!-- navigation bar with logo, title and compose button -->
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png">
       <span class="header">Tweeter</span>
@@ -30,6 +33,7 @@
     </nav>
 
     <main class="container">
+<!-- form for generating new tweets -->
       <section class="new-tweet">
         <h2>Compose Tweet</h2>
         <form method="POST" action="/tweets/">
@@ -38,6 +42,7 @@
           <span class="counter">140</span>
         </form>
       </section>
+<!-- placeholder-containers for error messages -->
       <div id="error-message"></div>
       <div id="tweet-container"></div>
     </main>

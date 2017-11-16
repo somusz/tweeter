@@ -1,5 +1,7 @@
 "use strict";
 
+//helper function to generate savetweet and gettweet functions
+//that are communicating with mongo database
 module.exports = function makeDataHelpers(db) {
   return {
 

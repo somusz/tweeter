@@ -1,11 +1,17 @@
+// app.js
+// controling rendering page, new tweets, re-rendering, and events
+
+//any action only on ready document
 $(document).ready (() => {
 
+//helper function to convert entries into safe text
   let escape = (str) => {
       var div = document.createElement('div');
       div.appendChild(document.createTextNode(str));
       return div.innerHTML;
     }
 
+//helper function to control time since the tweet was created
   let msToProperTime = (ms) => {
     let timeToPrint;
     let timeMeasure = '';
@@ -55,8 +61,10 @@ $(document).ready (() => {
     return `Posted ${timeToPrint} ${timeMeasure+plural} ago`;
   };
 
+//helper function for templating new tweets
   let createTweetElement = (tweet) => {
     return $(
+// icons wrapped in anchor for future feature additions
       `<article>
         <header>
           <img class="hovering" src=${tweet.user.avatars.small}>
@@ -67,14 +75,15 @@ $(document).ready (() => {
         <footer>
           <span>${msToProperTime(tweet.created_at)}</span>
           <span class="links">
-            <a href=''><i class="fa fa-flag" aria-hidden="true"></i></a>
-            <a href=''><i class="fa fa-retweet" aria-hidden="true"></i></a>
-            <a href=''><i class="fa fa-heart" aria-hidden="true"></i></a>
+            <a><i class="fa fa-flag" aria-hidden="true"></i></a>
+            <a><i class="fa fa-retweet" aria-hidden="true"></i></a>
+            <a><i class="fa fa-heart" aria-hidden="true"></i></a>
           </span>
         </footer>
       </article>`);
   };
 
+//helper function for deleting, prepending and re-rendering tweets
   let renderTweets = (tweets) => {
     $('#tweet-container').empty();
     tweets.forEach( (tweet) => {
@@ -82,6 +91,7 @@ $(document).ready (() => {
     });
   };
 
+//helper function for loading page and reloading page upon tweet submission
   let loadTweets = () => {
     $.ajax({
       url: '/tweets',
@@ -92,14 +102,19 @@ $(document).ready (() => {
     });
   };
 
+//calling page loading function
   loadTweets();
 
+//events upon new tweet submission
   $('.new-tweet form').submit (function() {
+//preventing html form submission event
     event.preventDefault();
 
+//variables for entry data in two formats
     let tweetData = $(this).serialize();
     let tweetText = $(this).children('textarea').val();
 
+//timed error message on attempt to submit blank tweet
     if (!tweetText) {
       $('.new-tweet').append(`<div id="error-nomsg">Hum louder!</div>`);
 
@@ -108,6 +123,7 @@ $(document).ready (() => {
       }, 3000);
     }
 
+//timed error message on attempt to submit oversized tweet
     else if (tweetText.length > 140) {
       $('.new-tweet').append(`<div id="error-over140">Cut it out, you're over 140!</div>`);
 
@@ -116,6 +132,7 @@ $(document).ready (() => {
       }, 3000);
     }
 
+//posting tweet upon valid entry
     else {
       $.ajax({
         url: '/tweets/',
@@ -123,8 +140,10 @@ $(document).ready (() => {
         data: tweetData,
         success: () => {
 
+//clearing textarea upon successful post
           $('#new-tweet-input').val('');
 
+//reloading element upon successful post
           loadTweets();
 
         }
@@ -132,6 +151,8 @@ $(document).ready (() => {
     };
   });
 
+//toggling new tweet form upon clicking compose button
+//and passing focus on textarea
   $('#compose-button').click(() => {
     $('.new-tweet').slideToggle('fast');
     $('.new-tweet textarea').focus();
