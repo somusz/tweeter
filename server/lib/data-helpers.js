@@ -3,12 +3,12 @@
 module.exports = function makeDataHelpers(db) {
   return {
 
-    saveTweet: function(newTweet, callback) {
+    saveTweet: (newTweet, callback) => {
       db.collection("tweets").insertOne(newTweet);
       callback(null, true);
     },
 
-    getTweets: function(callback) {
+    getTweets: (callback) => {
       db.collection("tweets").find().toArray((err, results) => {
         if (err) {
           callback(err);

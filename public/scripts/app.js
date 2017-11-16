@@ -1,22 +1,22 @@
-$(document).ready (function () {
+$(document).ready (() => {
 
-  let escape = function (str) {
+  let escape = (str) => {
       var div = document.createElement('div');
       div.appendChild(document.createTextNode(str));
       return div.innerHTML;
     }
 
-  let msToDays = function (ms) {
+  let msToProperTime = (ms) => {
     let timeToPrint;
     let timeMeasure = '';
     let plural = '';
     let since = Date.now() - ms;
-    let sinceInSec = Math.floor(since/1000);
-    let sinceInMin = Math.floor(since/1000/60);
-    let sinceInHrs = Math.floor(since/1000/60/60);
-    let sinceInDay = Math.floor(since/1000/60/60/24);
-    let sinceInMth = Math.floor(since/1000/60/60/24/12);
-    let sinceInYrs = Math.floor(since/1000/60/60/24/365);
+    let sinceInSec = Math.round(since/1000);
+    let sinceInMin = Math.round(since/1000/60);
+    let sinceInHrs = Math.round(since/1000/60/60);
+    let sinceInDay = Math.round(since/1000/60/60/24);
+    let sinceInMth = Math.round(since/1000/60/60/24/12);
+    let sinceInYrs = Math.round(since/1000/60/60/24/365);
 
     if (sinceInYrs > 0) {
       timeToPrint = sinceInYrs;
@@ -46,16 +46,16 @@ $(document).ready (function () {
     else {
       timeToPrint = sinceInSec;
       timeMeasure = 'second';
-    }
+    };
 
     if (timeToPrint > 1) {
       plural = 's';
-    }
+    };
 
     return `Posted ${timeToPrint} ${timeMeasure+plural} ago`;
-  }
+  };
 
-  let createTweetElement = function (tweet) {
+  let createTweetElement = (tweet) => {
     return $(
       `<article>
         <header>
@@ -65,7 +65,7 @@ $(document).ready (function () {
         </header>
         <p>${escape(tweet.content.text)}</p>
         <footer>
-          <span>${msToDays(tweet.created_at)}</span>
+          <span>${msToProperTime(tweet.created_at)}</span>
           <span class="links">
             <a href=''><i class="fa fa-flag" aria-hidden="true"></i></a>
             <a href=''><i class="fa fa-retweet" aria-hidden="true"></i></a>
@@ -73,28 +73,28 @@ $(document).ready (function () {
           </span>
         </footer>
       </article>`);
-  }
+  };
 
-  let renderTweets = function (tweets) {
-    tweets.forEach( function (tweet) {
-      let toAdd = createTweetElement(tweet);
-      $('#tweet-container').prepend(toAdd);
+  let renderTweets = (tweets) => {
+    $('#tweet-container').empty();
+    tweets.forEach( (tweet) => {
+      $('#tweet-container').prepend(createTweetElement(tweet));
     });
-  }
+  };
 
-  let loadTweets = function () {
+  let loadTweets = () => {
     $.ajax({
       url: '/tweets',
       method: 'GET',
-      success: function (data) {
+      success: (data) => {
         renderTweets(data);
       }
     });
-  }
+  };
 
   loadTweets();
 
-  $('.new-tweet form').submit (function () {
+  $('.new-tweet form').submit (function() {
     event.preventDefault();
 
     let tweetData = $(this).serialize();
@@ -103,7 +103,7 @@ $(document).ready (function () {
     if (!tweetText) {
       $('.new-tweet').append(`<div id="error-nomsg">Hum louder!</div>`);
 
-      setTimeout( function() {
+      setTimeout(() => {
         $('#error-nomsg').remove();
       }, 3000);
     }
@@ -111,7 +111,7 @@ $(document).ready (function () {
     else if (tweetText.length > 140) {
       $('.new-tweet').append(`<div id="error-over140">Cut it out, you're over 140!</div>`);
 
-      setTimeout( function() {
+      setTimeout(() => {
         $('#error-over140').remove();
       }, 3000);
     }
@@ -121,7 +121,7 @@ $(document).ready (function () {
         url: '/tweets/',
         method: 'POST',
         data: tweetData,
-        success: function () {
+        success: () => {
 
           $('#new-tweet-input').val('');
 
@@ -129,28 +129,11 @@ $(document).ready (function () {
 
         }
       });
-    }
-  })
+    };
+  });
 
-  $('#compose-button').click(function () {
+  $('#compose-button').click(() => {
     $('.new-tweet').slideToggle('fast');
     $('.new-tweet textarea').focus();
-  })
-
-
-  // let createTweetElement = function (tweet) {
-  //   let $tweet = $('<article>').addClass('tweet');
-  //   let $header = $('<header>').append('<img>').addClass('hovering').append('<span>').addClass('user-name hovering').append('<span>').addClass('handle hovering');
-  //   let $para = $('<p>');
-  //   let $spanLinks = $('span').addClass('links').
-  //   let $footer = $('<footer>').append().addClass
-  //   $tweet.append($('<footer>'));
-  //   // $tweet.append($header);
-  //   // $article.html(tweet);
-  //   console.log($header);
-  //   return $tweet;
-  // }
-
-
-
-})
+  });
+});

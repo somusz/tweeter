@@ -11,11 +11,20 @@ const MONGODB_URI   = "mongodb://localhost:27017/tweeter";
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+let closeDb = function() {
+  try {
+    db.close();
+  } catch (error) {
+    throw error;
+  } finally {
+    process.exit();
+  }
+};
 
-MongoClient.connect(MONGODB_URI, function (err, db) {
+MongoClient.connect(MONGODB_URI, (err, db) => {
   if (err) {
     throw err;
-  }
+  };
 
   const DataHelpers = require("./lib/data-helpers.js")(db);
 
@@ -27,6 +36,6 @@ MongoClient.connect(MONGODB_URI, function (err, db) {
     console.log("Example app listening on port " + PORT);
   });
 
-  //db.close();
+  process.on('SIGINT', closeDb);
 
 });
