@@ -2,7 +2,7 @@
 
 Tweeter is a simple, single-page Twitter clone. Submit and view your tweets!
 
-Stack: HTML, CSS, JS, jQuery, AJAX, Node, Express and MongoDB
+Stack: HTML, SASS/CSS, JS, jQuery, AJAX, Node, Express and MongoDB
 
 ## Getting Started
 
@@ -20,6 +20,7 @@ Stack: HTML, CSS, JS, jQuery, AJAX, Node, Express and MongoDB
 - jQuery
 - Md5
 - Mongodb
+- SASS
 
 ## Screenshot
 

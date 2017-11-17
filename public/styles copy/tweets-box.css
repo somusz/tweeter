@@ -1,0 +1,80 @@
+/*tweets flow design*/
+article {
+  margin: 2em 2em;
+  position: relative;
+  border: 1px solid #C0C0C0;
+  border-radius: 5px;
+}
+
+/*hover state changes*/
+article:hover {
+  border: 1px solid #4d4d4d;
+}
+
+article header {
+  background-color: #F0F0F0;
+  border-radius: 5px 5px 0 0;
+  padding: 10px;
+  height: 70px;
+  position: relative;
+}
+
+article:hover header .hovering {
+  opacity: 1;
+}
+
+/*image, username and user handle greyed out unless hovered over*/
+article header img {
+  opacity: 0.7;
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+}
+
+article header .user-name {
+  opacity: 0.7;
+  position: absolute;
+  left: 75px;
+  top: 10px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #133926;
+}
+
+article header .handle {
+  opacity: 0.7;
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  color: #4d4d4d;
+}
+
+article p {
+  padding: 20px;
+  font-size: 30px;
+  color: #133926;
+  word-wrap: break-word;
+}
+
+article footer {
+  border-top: 1px solid #C0C0C0;
+  padding: 10px;
+  color: #133926;
+}
+
+/*icons hidden unless hovered over*/
+article footer .links {
+  opacity: 0;
+  position: absolute;
+  right: 10px;
+}
+
+article footer .links i {
+  padding: 3px;
+}
+
+/*icons appear upon hovering over*/
+article:hover footer .links {
+  opacity: 1;
+}

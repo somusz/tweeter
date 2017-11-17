@@ -9,26 +9,31 @@
   z-index: 1000;
   padding: 0 2em 0 2em;
   background-color: #00a087;
-  /*designing title*/
-  /*controling div element that contains button(s)*/ }
-  #nav-bar .logo {
+
+  .logo {
     width: 80px;
     float: left;
-    height: 80px; }
-  #nav-bar .header {
+    height: 80px;
+  }
+
+/*designing title*/
+  .header {
     padding-left: 10px;
     line-height: 80px;
     font-size: 2em;
-    color: #e8fdff; }
-  #nav-bar div {
+    color: #e8fdff;
+  }
+
+/*controling div element that contains button(s)*/
+  div {
     position: fixed;
     top: 0;
     margin: 10px;
     right: 5%;
     height: 60px;
-    /*formatting individual button(s) in div*/
-    /*controling design on hover state*/ }
-    #nav-bar div button {
+
+/*formatting individual button(s) in div*/
+    button {
       font-size: 1.3em;
       color: #00a087;
       background-color: white;
@@ -37,7 +42,13 @@
       top: 100%;
       border: 1px solid black;
       border-radius: 5px;
-      padding: 10px; }
-    #nav-bar div button:hover {
+      padding: 10px;
+    }
+
+/*controling design on hover state*/
+    button:hover {
       opacity: 1;
-      color: black; }
+      color: black;
+    }
+  }
+}
